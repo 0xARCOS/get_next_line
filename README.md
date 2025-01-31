@@ -1,4 +1,16 @@
+<div align="center">
+    <img src="https://github.com/15Galan/42_project-readmes/blob/master/banners/cursus/projects/get_next_line-light.png#gh-light-mode-only" alt="Banner (claro)" />
+    <img src="https://github.com/15Galan/42_project-readmes/blob/master/banners/cursus/projects/get_next_line-dark.png#gh-dark-mode-only" alt="Banner (oscuro)" />
+    <a href='https://profile.intra.42.fr/users/aarcos' target="_blank">
+        <img alt='42 (oscuro)' src='https://img.shields.io/badge/Madrid-black?style=flat&logo=42&logoColor=white'/>
+    </a>
+    <img src="https://img.shields.io/badge/puntuación---%20%2F%20100-success?color=%2312bab9&style=flat" />
+    <img src="https://api.visitorbadge.io/api/visitors?user=V1nt3r4&repo=Get_Next_Line&label=visitas&countColor=%2385e3ff&style=flat&labelStyle=none"/>
+</div>
 
+---
+
+# Get_Next_Line
 
 ## Estructura del proyecto
 
@@ -8,9 +20,10 @@ El proyecto se divide en tres archivos principales:
 - get_next_line_utils.c : Funciones auxiliares
 
 ### get_next_line.h (Declaraciones)
-
+```
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+```
 
 - Este es un guard header que previene inclusiones múltiples
 - BUFFER_SIZE se define como 42 por defecto, pero puede cambiarse en la compilación
