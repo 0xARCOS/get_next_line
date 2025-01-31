@@ -9,8 +9,8 @@ El proyecto se divide en tres archivos principales:
 
 ### get_next_line.h (Declaraciones)
 
-``#ifndef GET_NEXT_LINE_H
-``# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
 - Este es un guard header que previene inclusiones múltiples
 - BUFFER_SIZE se define como 42 por defecto, pero puede cambiarse en la compilación
