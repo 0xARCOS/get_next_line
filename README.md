@@ -1,157 +1,104 @@
 <div align="center">
-    <img src="https://github.com/15Galan/42_project-readmes/blob/master/banners/cursus/projects/get_next_line-light.png#gh-light-mode-only" alt="Banner (claro)" />
-    <img src="https://github.com/15Galan/42_project-readmes/blob/master/banners/cursus/projects/get_next_line-dark.png#gh-dark-mode-only" alt="Banner (oscuro)" />
+    <img src="https://github.com/15Galan/42_project-readmes/blob/master/banners/cursus/projects/get_next_line-light.png#gh-light-mode-only" alt="Banner claro" />
+    <img src="https://github.com/15Galan/42_project-readmes/blob/master/banners/cursus/projects/get_next_line-dark.png#gh-dark-mode-only" alt="Banner oscuro" />
     <a href='https://profile.intra.42.fr/users/aarcos' target="_blank">
-        <img alt='42 (oscuro)' src='https://img.shields.io/badge/Madrid-black?style=flat&logo=42&logoColor=white'/>
+        <img alt='Campus 42 Madrid' src='https://img.shields.io/badge/Madrid-black?style=flat&logo=42&logoColor=white'/>
     </a>
-    <img src="https://img.shields.io/badge/puntuación---%20%2F%20100-success?color=%2312bab9&style=flat" />
-    <img src="https://api.visitorbadge.io/api/visitors?user=V1nt3r4&repo=Get_Next_Line&label=visitas&countColor=%2385e3ff&style=flat&labelStyle=none"/>
+    <img src="https://img.shields.io/badge/puntuación-💯%2F100-success?color=%2312bab9&style=flat" />
+    <img src="https://api.visitorbadge.io/api/visitors?user=0xARCOS&repo=get_next_line&label=visitas&countColor=%2385e3ff&style=flat&labelStyle=none"/>
 </div>
 
 ---
 
-# Get_Next_Line
+# get_next_line
 
-## Estructura del proyecto
+> Leer una línea de un descriptor de archivo puede parecer trivial, pero ¿y si sólo puedes usar `read()` una vez por llamada? Este proyecto entrena memoria dinámica, buffers y control de archivos.
 
-El proyecto se divide en tres archivos principales:
-- get_next_line.h : Header con declaraciones.
-- get_next_line.c : Funciones principales.
-- get_next_line_utils.c : Funciones auxiliares
+---
 
-### get_next_line.h (Declaraciones)
+## 📦 Descripción
+
+`get_next_line` es una función que devuelve una línea leída desde un descriptor de archivo (fd), sin importar su tamaño. Es parte del currículum de la **42 School** y una base sólida para proyectos que trabajan con archivos, sockets o entradas estándar.
+
+---
+
+## 📁 Estructura del Proyecto
+
 ```
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+get_next_line/
+├── get_next_line.h        # Declaraciones
+├── get_next_line.c        # Funciones principales
+├── get_next_line_utils.c  # Funciones auxiliares
 ```
 
-- Este es un guard header que previene inclusiones múltiples
-- BUFFER_SIZE se define como 42 por defecto, pero puede cambiarse en la compilación
+---
 
+## ⚙️ Compilación
 
-## Funciones Principales (get_next_line)
-#### 1. get_next_line
+Puedes compilar los archivos con:
 
-char *get_next_line(int fd)
-{
-    static char buffer[BUFFER_SIZE + 1];
-    static char *remainder;
-    char *line;
-}
+```bash
+cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c main.c -o gnl
+```
 
-- 'static buffer' : Mantiene el buffer entre llamadas
-- 'static remainder' : Guarda el contenido restante entre llamadas
-- 'fd' : File descriptor del archivo a leer
+O usando un `Makefile`:
 
-#### 2. get_line2
+```bash
+make
+```
 
-char *get_line2(char *remainder)
-{
-    char *line;
-    int i = 0;
-}
+---
 
-- Extrae una línea del remainder hasta encontrar '\n'
-- Cuenta caracteres hasta '\n' para asignar memoria
-- Copia los caracteres a la nueva línea
+## 🧠 Uso
 
-#### 3. update_remainder
+```c
+char *line;
+int fd = open("archivo.txt", O_RDONLY);
+line = get_next_line(fd);
+printf("%s", line);
+```
 
-char *update_remainder(char *remainder)
-{
-    char *new_remainder;
-    char *newline_pos;
-}
+La función devuelve:
+- Una línea completa (terminada en `\n` si hay una)
+- `NULL` al llegar al EOF o en caso de error
 
-- Actualiza el remainder después de extraer una línea
-- Busca la posición '\n'
-- Guardar el contenido después del '\n'
+---
 
-#### 4. read_to_remainder
+## 💡 Ejemplo de Salida
 
-int read_to_remainder(char **remainder, int fd, char *buffer)
-{
-    ssize_t bytes_read;
-    char *tmp;
-}
+Archivo de entrada:
+```
+Hola mundo
+Esto es una prueba
+```
 
-- Lee del archivo al buffer
-- Une el buffer con remainder existente
-- Continúa hasta encontrar '\n'
+Output esperado:
+```
+Hola mundo
+Esto es una prueba
+```
 
-## Funciones Auxiliares (get_next_line_utils.c)
+---
 
-#### 1. ft_strlen
+## 🧰 Funciones principales
 
-``size-t ft_strlen(char *str)
-- Cuenta caracteres hasta '\0'
-- Necesaria para gestionar string
+### `char *get_next_line(int fd);`
+Lee una línea del archivo, manejando buffer estático para mantener datos entre llamadas.
 
-#### 2. ft_strchr
+### `BUFFER_SIZE`
+Tamaño del buffer usado en cada llamada a `read()`. Puede modificarse en la compilación con `-D`.
 
-``char *ft_strchr(char *s, int c)
-- Busca primera ocurencia de un caracter
-- Retorna puntero a la posición o NULL
-- Crrucial  para encontrar '\n'
+---
 
-#### 3. ft_strjoin
-`` char *ft_strjoin(char *s1, char *s2)
-- Une dos strings en una nueva
-- Gestiona casos donde s1 ees NULL
-- Asigna memoria dinámicamente
+## 🧑‍💻 Autor
 
-## Flujo de Ejecución
+**Ariel (0xARCOS)**  
+📍 Campus 42 Madrid  
+🔗 [GitHub](https://github.com/0xARCOS)
 
-##### 1. Entrada de Datos:
-- La función recibe un fd
-- Lee datos del archivo en bloques usando BUFFER_SIZE
-- El fujo de entrada envía datos desde el archivo al pprograma
-##### 2. Procesamiento
-- Lee línea por línea hasta encontrar un carácter '\n'
-- Almacena el contenido en un buffer temporal
-- Procesa datos secuencialmente
-- Si ecuentra una línea vacía, devuelve una string vacía
-##### 3. Control de flujo
-- Verifica si hay más contenido para leer
-- Maneja el final del archivo (EOF)
-- Gestiona errores y excepciones durante la lectura
-##### 4. Salida
-- Devuelve una línea completa terminada en null
-- Mantiene el estado para la siguiente llamada
-- Conserva el contenido restantee para futuras lecturas
+---
 
-## Gestión de Memoria
+## 📜 Licencia
 
-#### Asignación de Memoria
-##### 1. Buffer Estático:
-- Se utiliza un buffer estático para almacenar la lectura temporal
-- El tamaño viene determinado por BUFFER_SIZE
-- No requiere liberación manual
-##### 2. Remainder
-- Variable estática que mantiene el contenido entre llamadas
-- debe liberarse correctamente cuando:
-	- Se actualiza con nuevo contenido
-	- Se llega al final del archivo
-	- Ocurre un error
-
-##### 3. Línea Retornada
-- Se asigna memoria dinámicamente con malloc
-- El tamaño se calcula hasta encontrar '\n' o '\0'
-- La responsabilidad de liberar esta memoria es del llamador
-
-#### Puntos Críticos
-##### 1. Liberación de Memoria
-- Liberar remainder antes de asignar nuevo contenido
-- Evitar pérdidas de punteros een strjoin
-- Manejar correctamente los casos de error
-
-##### 2. Memory Leaks Comunes
-- No liberar memoria al llegar a EOF
-- Liberar memoria antes de retornar NULL
-- No liberar memoria en casos de error
-
-##### 3. Gestión de Errores
-- Verificar retornos de malloc
-- Liberar meemoria antes de retornar NULL
-- Manejar errores de lectura correctamente
+Este proyecto es parte del aprendizaje en 42 y puede ser reutilizado para fines educativos.
 
