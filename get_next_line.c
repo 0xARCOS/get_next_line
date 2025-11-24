@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ariarcos <ariarcos>                        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/24 11:57:52 by ariarcos          #+#    #+#             */
+/*   Updated: 2025/11/24 11:58:47 by ariarcos         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_next_line.h"
 
@@ -10,7 +21,7 @@ static int	ft_handle_memory(char **acc_buffer, char *nl_ptr, size_t line_len)
 	{
 		free(*acc_buffer);
 		*acc_buffer = NULL;
-		return 1;
+		return (1);
 	}
 	old_ptr = *acc_buffer;
 	residue_len = ft_strlen(old_ptr) - line_len;
@@ -23,7 +34,7 @@ static int	ft_handle_memory(char **acc_buffer, char *nl_ptr, size_t line_len)
 	else
 		*acc_buffer = NULL;
 	free(old_ptr);
-	return 1;
+	return (1);
 }
 
 static char	*ft_extract_and_clean(char **acc_buffer)
@@ -58,10 +69,10 @@ static int	ft_read_data(int fd, char **acc_buffer)
 	char	*temp;
 
 	if (*acc_buffer && ft_strchr(*acc_buffer, '\n'))
-		return 1;
+		return (1);
 	buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
-		return -1;
+		return (-1);
 	bytes_read = read(fd, buf, BUFFER_SIZE);
 	if (bytes_read == -1)
 		return (free(buf), -1);
@@ -74,8 +85,8 @@ static int	ft_read_data(int fd, char **acc_buffer)
 	if (temp)
 		free(temp);
 	if (!*acc_buffer)
-		return -1;
-	return ft_read_data(fd, acc_buffer);
+		return (-1);
+	return (ft_read_data(fd, acc_buffer));
 }
 
 char	*get_next_line(int fd)
